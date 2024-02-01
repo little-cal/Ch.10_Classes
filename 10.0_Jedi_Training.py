@@ -1,4 +1,4 @@
-# 10.0 Jedi Training (15pts)  Name:________________
+# 10.0 Jedi Training (15pts)  Name: Caleb Little
 
 '''
 CLASSY ANIMALS (5pts)
@@ -8,23 +8,59 @@ CLASSY ANIMALS (5pts)
      * Add an attribute for the animal name.
      * Add an eat() method for Animal that prints 'Munch munch.'
      * Add a make_noise() method for Animal that prints 'Grrr says [animal name].'
+'''
+import arcade
+import random
 
-     
+
+class Animal:
+    def __init__(self, new_name):
+        print("An animal has been born")
+        self.name = new_name
+
+    def eat(self):
+        print("Munch munch.")
+
+    def make_noise(self):
+        print("Grrr says", self.name)
+
+
+'''
  B. Write code that defines a class named Cat:
      * Make Animal the parent.
      * Add a constructor for Cat that prints 'A cat has been born.'
      * Modify the constructor so it calls the parent constructor as well.
      * Add a make_noise() method for Cat that prints 'Meow says [animal name].'
+'''
 
-     
+
+class Cat(Animal):
+    def __init__(self, new_name):
+        super().__init__(new_name)
+        print("A cat has been born.")
+
+    def make_noise(self):
+        print("Meow says", self.name)
+
+
+'''
  C. Write code that defines a class named Dog:
      
      * Make Animal the parent.
      * Add a constructor for Dog that prints 'A dog has been born.'
      * Modify the constructor so it calls the parent constructor as well.
      * Add a make_noise() method for Dog that prints 'Bark says [animal name].'
+'''
 
-     
+
+class Dog(Animal):
+    def __init__(self, new_name):
+        super().__init__(new_name)
+        print("A dog has been born.")
+
+    def make_noise(self):
+        print("Bark says", self.name)
+'''  
  D. Write a main program with:
      
      * Code that creates a cat, two dogs, and an animal with names.
@@ -47,11 +83,18 @@ An animal has been born.
 Munch munch
 Grrr says (animal name) .
 '''
-
-
-
-
-
+# cat_1 = Cat("Zeus")
+# cat_1.eat()
+# cat_1.make_noise()
+# dog_1 = Dog("Spot")
+# dog_1.eat()
+# dog_1.make_noise()
+# dog_2 = Dog("Strauss")
+# dog_2.eat()
+# dog_2.make_noise()
+# animal = Animal("Bob")
+# animal.eat()
+# animal.make_noise()
 
 
 
@@ -96,9 +139,46 @@ USS Hermon is submerging!
 '''
 
 
+class Boat:
+    def __init__(self, name):
+        self.boat_name = name
+        self.isDocked = True
+
+    def dock(self):
+        if self.isDocked:
+            print(self.boat_name, "is already docked.")
+        else:
+            self.isDocked = True
+            print(self.boat_name, "is docking.")
+
+    def undock(self):
+        if self.isDocked:
+            self.isDocked = False
+            print(self.boat_name, "is undocking.")
+        else:
+            print(self.boat_name, "is already undocked.")
 
 
+class Submarine(Boat):
+    def __init__(self, name):
+        super().__init__(name)
 
+    def submerge(self):
+        if self.isDocked:
+            print(self.boat_name, "can't submerge.")
+        else:
+            print(self.boat_name, "is submerging.")
+
+
+# sub_1 = Submarine("USS Little")
+# sub_1.dock()
+# sub_1.undock()
+# sub_1.undock()
+# sub_1.dock()
+# sub_1.dock()
+# sub_1.submerge()
+# sub_1.undock()
+# sub_1.submerge()
 
 '''
 1000 CIRCLES (5pts)
@@ -114,8 +194,30 @@ Feel free to see what happens if you draw it 10,000 times as well.
 '''
 
 
+arcade.open_window(500, 300, "1000 Circles")
+arcade.set_background_color(arcade.color.WHITE)
 
 
+class Circle:
+    def __init__(self):
+        self.x = random.randint(1, 500)
+        self.y = random.randint(1, 300)
+        self.color = random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)
+        self.r = 10
+
+    def draw_circle(self):
+        arcade.draw_circle_filled(self.x, self.y, self.r, self.color)
 
 
+def main():
+    arcade.start_render()
+    for i in range(1, 1000):
+        circle = Circle()
+        circle.draw_circle()
+    arcade.finish_render()
+    arcade.run()
+
+
+if __name__ == '__main__':
+    main()
 
